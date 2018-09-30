@@ -8,4 +8,11 @@
   <groupId>com.pinyougou</groupId>
   <artifactId>pinyougou-pojo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-solr</artifactId>
+	    <version>1.5.5.RELEASE</version>
+	</dependency>
+  </dependencies>
 </project>

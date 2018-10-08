@@ -6,82 +6,73 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>com.pinyougou</groupId>
-  <artifactId>pinyougou-manager-web</artifactId>
+  <artifactId>pinyougou-page-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
-  <dependencies>
-    <!-- Spring -->
+      <dependencies>
+  
+  		<!-- Spring -->
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-beans</artifactId>
+		<artifactId>spring-context</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-webmvc</artifactId>
+		<artifactId>spring-beans</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-jdbc</artifactId>
+		<artifactId>spring-webmvc</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-aspects</artifactId>
+		<artifactId>spring-jdbc</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-jms</artifactId>
+		<artifactId>spring-aspects</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-context-support</artifactId>
+		<artifactId>spring-jms</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-test</artifactId>
-	</dependency>
-	<!-- 身份验证 -->
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-web</artifactId>		
+		<artifactId>spring-context-support</artifactId>		
 	</dependency>
 	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-config</artifactId>		
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>		
 	</dependency>
-
 	<!-- dubbo相关 -->
 	<dependency>
 		<groupId>com.alibaba</groupId>
-		<artifactId>dubbo</artifactId>
+		<artifactId>dubbo</artifactId>	
 	</dependency>
 	<dependency>
 		<groupId>org.apache.zookeeper</groupId>
-		<artifactId>zookeeper</artifactId>
+		<artifactId>zookeeper</artifactId>	
 	</dependency>
 	<dependency>
 		<groupId>com.github.sgroschupf</groupId>
-		<artifactId>zkclient</artifactId>
+		<artifactId>zkclient</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
+		<artifactId>junit</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>com.alibaba</groupId>
-		<artifactId>fastjson</artifactId>
+		<artifactId>fastjson</artifactId>		
 	</dependency>
 	<dependency>
 		<groupId>javassist</groupId>
-		<artifactId>javassist</artifactId>
+		<artifactId>javassist</artifactId>		
 	</dependency>
 	<dependency>
 	    <groupId>commons-codec</groupId>
-	    <artifactId>commons-codec</artifactId>
+	    <artifactId>commons-codec</artifactId>	   
 	</dependency>
 	<dependency>
 		<groupId>javax.servlet</groupId>
@@ -89,33 +80,17 @@
 		<scope>provided</scope>
 	</dependency>
 
-
+	
 	
 	<dependency>
-		<groupId>com.pinyougou</groupId>
-		<artifactId>pinyougou-sellergoods-interface</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.freemarker</groupId>
+		<artifactId>freemarker</artifactId>
+		<version>2.3.23</version>
 	</dependency>
 	
-	<dependency>
-		<groupId>com.pinyougou</groupId>
-		<artifactId>pinyougou-common</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
 	<dependency>
 		<groupId>com.pinyougou</groupId>
 		<artifactId>pinyougou-dao</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>com.pinyougou</groupId>
-		<artifactId>pinyougou-content-interface</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>com.pinyougou</groupId>
-		<artifactId>pinyougou-search-interface</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
 	<dependency>
@@ -123,20 +98,22 @@
 		<artifactId>pinyougou-page-interface</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
-  </dependencies>
-     <build>  
-	  <plugins>
+      </dependencies>
+  
+  <build>  
+	  <plugins>	     
 	      <plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
 					<!-- 指定端口 -->
-					<port>9101</port>
+					<port>9005</port>
 					<!-- 请求路径 -->
 					<path>/</path>
 				</configuration>
 	  	  </plugin>
 	  </plugins>  
     </build>
+  
 </project>

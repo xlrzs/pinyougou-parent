@@ -22,6 +22,7 @@ import com.pinyougou.sellergoods.service.GoodsService;
 
 import entity.PageResult;
 import entity.Result;
+
 /**
  * controller
  * @author Administrator
@@ -45,6 +46,12 @@ public class GoodsController {
 	@Autowired
 	private Destination queueSolrDeleteDestination;//用户在索引库中删除记录
 	
+	@Autowired
+	private Destination topicPageDestination;//用户在索引库中删除记录
+	
+	@Autowired
+	private Destination topicPageDeleteDestination;//用于删除静态网页的消息
+
 	/**
 	 * 返回全部列表
 	 * @return
@@ -102,7 +109,15 @@ public class GoodsController {
 		try {
 			goodsService.delete(ids);
 			
-			jmsTemplate.send(queueSolrDeleteDestination, new MessageCreator() {		
+		/*	jmsTemplate.send(queueSolrDeleteDestination, new MessageCreator() {		
+				@Override
+				public Message createMessage(Session session) throws JMSException {	
+					return session.createObjectMessage(ids);
+				}
+			});	*/
+
+			//删除页面
+			jmsTemplate.send(topicPageDeleteDestination, new MessageCreator() {		
 				@Override
 				public Message createMessage(Session session) throws JMSException {	
 					return session.createObjectMessage(ids);
@@ -152,6 +167,17 @@ public class GoodsController {
 						System.out.println("没有明细数据");
 				}				
 		
+				
+				//静态页生成
+				for(final Long goodsId:ids){
+					jmsTemplate.send(topicPageDestination, new MessageCreator() {						
+						@Override
+						public Message createMessage(Session session) throws JMSException {							
+							return session.createTextMessage(goodsId+"");
+						}
+					});
+				}
+
 				//静态页生成
 				/*for(Long goodsId:ids){
 					itemPageService.genItemHtml(goodsId);

@@ -36,4 +36,9 @@
 	    <constructor-arg value="pinyougou_topic_page"/>  
 	</bean>  
 
+	<!--这个是订阅模式  用于删除页面-->  
+	<bean id="topicPageDeleteDestination" class="org.apache.activemq.command.ActiveMQTopic">  
+	    <constructor-arg value="pinyougou_topic_page_delete"/>  
+	</bean>  
+
 </beans>

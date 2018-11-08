@@ -45,7 +45,7 @@
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-test</artifactId>		
 	</dependency>
-	<!-- dubbo相关 -->
+	<!-- dubbo相关 
 	<dependency>
 		<groupId>com.alibaba</groupId>
 		<artifactId>dubbo</artifactId>	
@@ -58,6 +58,7 @@
 		<groupId>com.github.sgroschupf</groupId>
 		<artifactId>zkclient</artifactId>		
 	</dependency>
+	-->
 	<dependency>
 		<groupId>junit</groupId>
 		<artifactId>junit</artifactId>		
@@ -80,7 +81,12 @@
 		<scope>provided</scope>
 	</dependency>
 
-	
+	 <dependency>
+		<groupId>org.apache.activemq</groupId>
+		<artifactId>activemq-client</artifactId>
+		<version>5.13.4</version>
+	 </dependency>
+
 	
 	<dependency>
 		<groupId>org.freemarker</groupId>

@@ -1,35 +1,41 @@
-//ÉÌÆ·ÏêÏ¸Ò³£¨¿ØÖÆ²ã£©
-app.controller('itemController',function($scope){
-	//ÊıÁ¿²Ù×÷
+app.controller("itemController",function($scope,$http){
+	
+	$scope.specificationItems={};//å­˜å‚¨ç”¨æˆ·é€‰æ‹©çš„è§„æ ¼
+	
+	//æ•°é‡åŠ å‡
 	$scope.addNum=function(x){
-		$scope.num=$scope.num+x;
+		$scope.num+=x;
 		if($scope.num<1){
 			$scope.num=1;
-		}
-	}		
-	
-	$scope.specificationItems={};//¼ÇÂ¼ÓÃ»§Ñ¡ÔñµÄ¹æ¸ñ
-	//ÓÃ»§Ñ¡Ôñ¹æ¸ñ
-	$scope.selectSpecification=function(name,value){	
-		$scope.specificationItems[name]=value;
-	}	
-	//ÅĞ¶ÏÄ³¹æ¸ñÑ¡ÏîÊÇ·ñ±»ÓÃ»§Ñ¡ÖĞ
-	$scope.isSelected=function(name,value){
-		if($scope.specificationItems[name]==value){
-			return true;
-		}else{
-			return false;
 		}		
 	}
 	
-	//¼ÓÔØÄ¬ÈÏSKU
+	//ç”¨æˆ·é€‰æ‹©è§„æ ¼
+	$scope.selectSpecification=function(key,value){
+		$scope.specificationItems[key]=value;		
+		searchSku();//æŸ¥è¯¢SKU
+	}
+	
+	//åˆ¤æ–­æŸè§„æ ¼æ˜¯å¦è¢«é€‰ä¸­
+	$scope.isSelected=function(key,value){
+		if($scope.specificationItems[key]==value){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	$scope.sku={};//å½“å‰é€‰æ‹©çš„SKU
+	
+	//åŠ è½½é»˜è®¤SKU
 	$scope.loadSku=function(){
-		$scope.sku=skuList[0];		
+		$scope.sku=skuList[0];
 		$scope.specificationItems= JSON.parse(JSON.stringify($scope.sku.spec)) ;
 	}
-
-	//Æ¥ÅäÁ½¸ö¶ÔÏó
-	matchObject=function(map1,map2){		
+	
+	//åŒ¹é…ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸ç­‰
+	matchObject=function(map1,map2){
+		
 		for(var k in map1){
 			if(map1[k]!=map2[k]){
 				return false;
@@ -39,29 +45,37 @@ app.controller('itemController',function($scope){
 			if(map2[k]!=map1[k]){
 				return false;
 			}			
-		}
-		return true;		
+		}		
+		return true;
+		
 	}
-	//²éÑ¯SKU
+	
+	//æ ¹æ®è§„æ ¼æŸ¥è¯¢sku
 	searchSku=function(){
-		for(var i=0;i<skuList.length;i++ ){
-			if( matchObject(skuList[i].spec ,$scope.specificationItems ) ){
-				$scope.sku=skuList[i];
-				return ;
-			}			
-		}	
-		$scope.sku={id:0,title:'--------',price:0};//Èç¹ûÃ»ÓĞÆ¥ÅäµÄ		
+		
+		for(var i=0;i<skuList.length;i++){
+			 if(matchObject( skuList[i].spec ,$scope.specificationItems)){
+				 $scope.sku=skuList[i];
+				 return ;
+			 }			
+		}
+		$scope.sku={id:0,title:'-----',price:0};
 	}
-
-	//ÓÃ»§Ñ¡Ôñ¹æ¸ñ
-	$scope.selectSpecification=function(name,value){	
-		$scope.specificationItems[name]=value;
-		searchSku();//¶ÁÈ¡sku
-	}
-	//Ìí¼ÓÉÌÆ·µ½¹ºÎï³µ
+	
+	//æ·»åŠ å•†å“åˆ°è´­ç‰©è½¦
 	$scope.addToCart=function(){
-		alert('skuid:'+$scope.sku.id);				
+		$http.get('http://localhost:9107/cart/addGoodsToCartList.do?itemId='
+				+ $scope.sku.id +'&num='+$scope.num,{'withCredentials':true}).success(
+				 function(response){
+					 if(response.success){
+						 location.href='http://localhost:9107/cart.html';//è·³è½¬åˆ°è´­ç‰©è½¦é¡µé¢
+					 }else{
+						 alert(response.message);
+					 }					 
+				 }				
+		);				
 	}
 
+	
+	
 });
-

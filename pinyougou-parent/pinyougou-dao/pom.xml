@@ -9,6 +9,25 @@
   <artifactId>pinyougou-dao</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  
+ <properties>
+ 	<env>dev</env>
+  </properties>
+  <profiles>
+  	<profile>
+  		<id>dev</id>
+  		<properties>
+  			<env>dev</env>
+  		</properties>
+  	</profile>    
+  	<profile>
+  		<id>pro</id>
+  		<properties>
+  			<env>pro</env>
+  		</properties>
+  	</profile>
+  </profiles>
+
   <dependencies>
   	<dependency>
 	    <groupId>com.github.pagehelper</groupId>
@@ -48,4 +67,17 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
   </dependencies>
+  
+    <build>  
+		 <filters>
+	  		<filter>src/main/resources/filters/db_${env}.properties</filter>
+	  	</filters>
+	  	<resources>
+	  		<resource>
+	  			<directory>src/main/resources</directory>
+	  			<filtering>true</filtering>
+	  		</resource>  		
+	  	</resources>
+
+    </build>
 </project>

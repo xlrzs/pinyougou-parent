@@ -7,19 +7,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import util.CookieUtil;
 
 
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+
+
+
 import com.pinyougou.cart.service.CartService;
 import com.pinyougou.pojogroup.Cart;
 
 import entity.Result;
+
 
 
 
@@ -81,11 +85,11 @@ public class CartController {
 	 * @return
 	 */
 	@RequestMapping("/addGoodsToCartList")
-	@CrossOrigin(origins="http://localhost:9105",allowCredentials="true")
+//	@CrossOrigin(origins="http://localhost:9105",allowCredentials="true")
 	public Result addGoodsToCartList(Long itemId,Integer num){
 		
-		//response.setHeader("Access-Control-Allow-Origin", "http://localhost:9105");//可以访问的域(当此方法不需要操作cookie)
-		//response.setHeader("Access-Control-Allow-Credentials", "true");//如果操作cookie，必须加上这句话
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:9105");//可以访问的域(当此方法不需要操作cookie)
+		response.setHeader("Access-Control-Allow-Credentials", "true");//如果操作cookie，必须加上这句话
 		String username = SecurityContextHolder.getContext().getAuthentication().getName(); 
 		System.out.println("当前登录用户："+username);
 		try {			
